@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CHARACTERS, CHAR_INDEX } from '../data/characters.js'
+import { UNIQUE_CHARACTERS as CHARACTERS, CHAR_INDEX } from '../data/characters.js'
 import ObcImage from '../components/ObcImage.jsx'
 
 export default function ToolView() {

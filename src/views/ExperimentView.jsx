@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { CHARACTERS } from '../data/characters.js'
+import { UNIQUE_CHARACTERS as CHARACTERS } from '../data/characters.js'
 import ObcImage from '../components/ObcImage.jsx'
 import {
   STUDY_SET_SIZE,

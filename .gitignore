@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+*.local
+
+# Large raw dataset — do not commit. Download separately (see README).
+HUST-OBC.zip
+HUST-OBC/
+data/raw/

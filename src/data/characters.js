@@ -1,7 +1,7 @@
-// Curated character dataset for the Oracle Bone Script Explorer.
+// Curated character dataset for ChineseOracleRoots.
 //
 // SCHEMA (one object per character):
-//   char        {string}  modern glyph (traditional/standard form used across CJK)
+//   char        {string}  modern glyph (standard form), the lookup key
 //   pinyin      {string}  Mandarin reading (for reference)
 //   gloss       {string}  short English meaning (adapted from CC-CEDICT)
 //   type        {string}  formation category: "pictograph" | "ideograph" | "compound"
@@ -9,130 +9,222 @@
 //                         whose memory effect the experiment tests)
 //   obcImage    {string}  filename of the oracle bone image in /public/obc/
 //                         (populated by extract_obc.py from the HUST-OBC dataset)
-//   evolution   {array}   optional list of {stage, image} for the evolution strip
 //
 // The `origin` text is the independent-variable content: in the experiment's
-// "with-origin" condition learners see it; in the "gloss-only" condition they do not.
+// "origin" condition learners see it; in the "gloss" condition they do not. It should
+// describe what the oracle-bone form DEPICTED, not merely restate the meaning.
 //
-// Sources: etymologies synthesised from Wiktionary / standard references; glosses
-// adapted from CC-CEDICT. Oracle bone imagery from HUST-OBC (see README).
+// Sources: etymologies synthesised from Wiktionary / standard references (Shuowen,
+// Outlier, Wenlin); glosses adapted from CC-CEDICT. Oracle bone imagery from HUST-OBC.
 
 export const CHARACTERS = [
-  {
-    char: '日',
-    pinyin: 'rì',
-    gloss: 'sun; day',
-    type: 'pictograph',
-    origin:
-      'A drawing of the sun: a round disc with a mark in the centre. The rounded ' +
-      'oracle-bone shape was later squared off into the modern box 日.',
-    obcImage: 'ri.png',
-  },
-  {
-    char: '月',
-    pinyin: 'yuè',
-    gloss: 'moon; month',
-    type: 'pictograph',
-    origin:
-      'A picture of a crescent moon. It was drawn as a curved sliver to distinguish ' +
-      'it from the round sun 日.',
-    obcImage: 'yue.png',
-  },
-  {
-    char: '山',
-    pinyin: 'shān',
-    gloss: 'mountain',
-    type: 'pictograph',
-    origin:
-      'A drawing of three peaks rising from a base — a mountain range seen on the ' +
-      'horizon. The three points survive in the modern form.',
-    obcImage: 'shan.png',
-  },
-  {
-    char: '水',
-    pinyin: 'shuǐ',
-    gloss: 'water',
-    type: 'pictograph',
-    origin:
-      'A picture of a flowing stream: a central current with droplets or ripples on ' +
-      'either side.',
-    obcImage: 'shui.png',
-  },
-  {
-    char: '木',
-    pinyin: 'mù',
-    gloss: 'tree; wood',
-    type: 'pictograph',
-    origin:
-      'A tree with branches reaching up and roots spreading down from a central ' +
-      'trunk.',
-    obcImage: 'mu.png',
-  },
-  {
-    char: '火',
-    pinyin: 'huǒ',
-    gloss: 'fire',
-    type: 'pictograph',
-    origin:
-      'A drawing of flames rising to a point, with sparks flicking off to the sides.',
-    obcImage: 'huo.png',
-  },
-  {
-    char: '人',
-    pinyin: 'rén',
-    gloss: 'person; human',
-    type: 'pictograph',
-    origin:
-      'A side view of a standing human being, showing the torso and a leg — a person ' +
-      'seen in profile, bending slightly forward.',
-    obcImage: 'ren.png',
-  },
-  {
-    char: '目',
-    pinyin: 'mù',
-    gloss: 'eye',
-    type: 'pictograph',
-    origin:
-      'A drawing of an eye with the pupil in the middle. Originally horizontal, it ' +
-      'was rotated upright, which is why the modern form stands on end.',
-    obcImage: 'mu_eye.png',
-  },
-  {
-    char: '口',
-    pinyin: 'kǒu',
-    gloss: 'mouth; opening',
-    type: 'pictograph',
+  // ---- Nature & sky ----
+  { char: '日', pinyin: 'rì', gloss: 'sun; day', type: 'pictograph',
+    origin: 'A drawing of the sun: a round disc with a mark in the centre. The rounded oracle-bone shape was later squared off into the modern box 日.',
+    obcImage: 'ri.png' },
+  { char: '月', pinyin: 'yuè', gloss: 'moon; month', type: 'pictograph',
+    origin: 'A picture of a crescent moon, drawn as a curved sliver to distinguish it from the round sun 日.',
+    obcImage: 'yue.png' },
+  { char: '山', pinyin: 'shān', gloss: 'mountain', type: 'pictograph',
+    origin: 'Three peaks rising from a base — a mountain range on the horizon. The three points survive in the modern form.',
+    obcImage: 'shan.png' },
+  { char: '水', pinyin: 'shuǐ', gloss: 'water', type: 'pictograph',
+    origin: 'A flowing stream: a central current with droplets or ripples on either side.',
+    obcImage: 'shui.png' },
+  { char: '火', pinyin: 'huǒ', gloss: 'fire', type: 'pictograph',
+    origin: 'Flames rising to a point, with sparks flicking off to the sides.',
+    obcImage: 'huo.png' },
+  { char: '木', pinyin: 'mù', gloss: 'tree; wood', type: 'pictograph',
+    origin: 'A tree with branches reaching up and roots spreading down from a central trunk.',
+    obcImage: 'mu.png' },
+  { char: '雨', pinyin: 'yǔ', gloss: 'rain', type: 'pictograph',
+    origin: 'Drops of water falling from a line representing the sky. The dots inside the modern frame are the falling raindrops.',
+    obcImage: 'yu.png' },
+  { char: '雲', pinyin: 'yún', gloss: 'cloud', type: 'pictograph',
+    origin: 'A swirling, curling shape depicting vapour rising and coiling into a cloud.',
+    obcImage: 'yun.png' },
+  { char: '電', pinyin: 'diàn', gloss: 'lightning; electricity', type: 'pictograph',
+    origin: 'A jagged streak of lightning forking across the sky, later placed under the "rain" element.',
+    obcImage: 'dian.png' },
+  { char: '土', pinyin: 'tǔ', gloss: 'earth; soil', type: 'pictograph',
+    origin: 'A lump or mound of earth resting on the ground line — a clod of soil.',
+    obcImage: 'tu.png' },
+  { char: '石', pinyin: 'shí', gloss: 'stone', type: 'pictograph',
+    origin: 'A rock lying at the foot of a cliff or overhang.',
+    obcImage: 'shi_stone.png' },
+  { char: '田', pinyin: 'tián', gloss: 'field; farmland', type: 'pictograph',
+    origin: 'A plot of farmland divided by paths into squares — a grid seen from above.',
+    obcImage: 'tian.png' },
+  { char: '井', pinyin: 'jǐng', gloss: 'well', type: 'pictograph',
+    origin: 'The wooden frame of criss-crossed logs built around the mouth of a well.',
+    obcImage: 'jing.png' },
+
+  // ---- Body ----
+  { char: '人', pinyin: 'rén', gloss: 'person; human', type: 'pictograph',
+    origin: 'A side view of a standing human, showing the torso and a leg — a person seen in profile, bending slightly forward.',
+    obcImage: 'ren.png' },
+  { char: '大', pinyin: 'dà', gloss: 'big; large', type: 'pictograph',
+    origin: 'A person standing with arms and legs stretched wide — a figure spread out to suggest largeness.',
+    obcImage: 'da.png' },
+  { char: '目', pinyin: 'mù', gloss: 'eye', type: 'pictograph',
+    origin: 'An eye with the pupil in the middle. Originally horizontal, later rotated upright, which is why the modern form stands on end.',
+    obcImage: 'mu_eye.png' },
+  { char: '口', pinyin: 'kǒu', gloss: 'mouth; opening', type: 'pictograph',
     origin: 'A simple outline of an open mouth.',
-    obcImage: 'kou.png',
-  },
-  {
-    char: '手',
-    pinyin: 'shǒu',
-    gloss: 'hand',
-    type: 'pictograph',
-    origin: 'A drawing of a hand with the five fingers spread out from the wrist.',
-    obcImage: 'shou.png',
-  },
-  {
-    char: '雨',
-    pinyin: 'yǔ',
-    gloss: 'rain',
-    type: 'pictograph',
-    origin:
-      'Drops of water falling from a line representing the sky (or a cloud). The dots ' +
-      'inside the modern frame are the falling raindrops.',
-    obcImage: 'yu.png',
-  },
-  {
-    char: '明',
-    pinyin: 'míng',
-    gloss: 'bright; clear',
-    type: 'compound',
-    origin:
-      'A compound of sun 日 and moon 月 placed together — the two brightest things in ' +
-      'the sky combined to mean "bright".',
-    obcImage: 'ming.png',
-  },
+    obcImage: 'kou.png' },
+  { char: '耳', pinyin: 'ěr', gloss: 'ear', type: 'pictograph',
+    origin: 'The outline of an ear, showing the outer curve and the lobe.',
+    obcImage: 'er.png' },
+  { char: '手', pinyin: 'shǒu', gloss: 'hand', type: 'pictograph',
+    origin: 'A hand with the five fingers spread out from the wrist.',
+    obcImage: 'shou.png' },
+  { char: '心', pinyin: 'xīn', gloss: 'heart; mind', type: 'pictograph',
+    origin: 'A drawing of the heart organ, with its chambers and the aorta at the top.',
+    obcImage: 'xin.png' },
+  { char: '足', pinyin: 'zú', gloss: 'foot', type: 'pictograph',
+    origin: 'A leg and foot: the calf above and the foot with toes below.',
+    obcImage: 'zu.png' },
+  { char: '自', pinyin: 'zì', gloss: 'self; nose', type: 'pictograph',
+    origin: 'A picture of a nose. Because people point at their own nose to mean "me", it came to mean "self".',
+    obcImage: 'zi.png' },
+  { char: '首', pinyin: 'shǒu', gloss: 'head', type: 'pictograph',
+    origin: 'A head shown with hair on top and an eye beneath — the whole head in profile.',
+    obcImage: 'shou_head.png' },
+
+  // ---- Animals ----
+  { char: '馬', pinyin: 'mǎ', gloss: 'horse', type: 'pictograph',
+    origin: 'A horse in profile: mane, body, legs and tail. The four legs became the dots at the base of the modern form.',
+    obcImage: 'ma.png' },
+  { char: '鳥', pinyin: 'niǎo', gloss: 'bird', type: 'pictograph',
+    origin: 'A bird standing in profile, with head, wing, body and clawed feet.',
+    obcImage: 'niao.png' },
+  { char: '魚', pinyin: 'yú', gloss: 'fish', type: 'pictograph',
+    origin: 'A fish drawn head, body with fins, and tail — the tail became the four dots below.',
+    obcImage: 'yu_fish.png' },
+  { char: '虎', pinyin: 'hǔ', gloss: 'tiger', type: 'pictograph',
+    origin: 'A tiger standing on its hind legs, showing its open jaws, striped body and tail.',
+    obcImage: 'hu.png' },
+  { char: '象', pinyin: 'xiàng', gloss: 'elephant', type: 'pictograph',
+    origin: 'An elephant in profile, the long trunk clearly drawn curving down from the head.',
+    obcImage: 'xiang.png' },
+  { char: '羊', pinyin: 'yáng', gloss: 'sheep; goat', type: 'pictograph',
+    origin: 'A sheep seen from the front, dominated by its two curved horns.',
+    obcImage: 'yang.png' },
+  { char: '牛', pinyin: 'niú', gloss: 'ox; cow', type: 'pictograph',
+    origin: 'An ox head seen from the front, emphasising the two upward-curving horns.',
+    obcImage: 'niu.png' },
+  { char: '犬', pinyin: 'quǎn', gloss: 'dog', type: 'pictograph',
+    origin: 'A dog in profile with its curled-up tail — the small stroke on the modern form is that tail.',
+    obcImage: 'quan.png' },
+  { char: '龍', pinyin: 'lóng', gloss: 'dragon', type: 'pictograph',
+    origin: 'A mythical serpent-like creature with a crested head, open mouth and a long coiling body.',
+    obcImage: 'long.png' },
+  { char: '龜', pinyin: 'guī', gloss: 'turtle', type: 'pictograph',
+    origin: 'A turtle seen from the side: head, shell with its pattern, feet and tail.',
+    obcImage: 'gui.png' },
+
+  // ---- Plants & food ----
+  { char: '禾', pinyin: 'hé', gloss: 'grain; standing grain', type: 'pictograph',
+    origin: 'A stalk of grain bending under the weight of its ripe, drooping head.',
+    obcImage: 'he.png' },
+  { char: '竹', pinyin: 'zhú', gloss: 'bamboo', type: 'pictograph',
+    origin: 'Two bamboo stalks side by side, each with a pair of hanging leaves.',
+    obcImage: 'zhu.png' },
+  { char: '米', pinyin: 'mǐ', gloss: 'rice (grains)', type: 'pictograph',
+    origin: 'Scattered grains of rice separated by the lines of a threshing frame.',
+    obcImage: 'mi.png' },
+  { char: '果', pinyin: 'guǒ', gloss: 'fruit', type: 'pictograph',
+    origin: 'A tree 木 with round fruit hanging in its branches at the top.',
+    obcImage: 'guo.png' },
+
+  // ---- Tools & objects ----
+  { char: '刀', pinyin: 'dāo', gloss: 'knife; blade', type: 'pictograph',
+    origin: 'A single-edged knife shown in profile, with its curved blade and handle.',
+    obcImage: 'dao.png' },
+  { char: '弓', pinyin: 'gōng', gloss: 'bow', type: 'pictograph',
+    origin: 'An archer\'s bow, drawn as the curved wooden body (sometimes with the string).',
+    obcImage: 'gong.png' },
+  { char: '矢', pinyin: 'shǐ', gloss: 'arrow', type: 'pictograph',
+    origin: 'An arrow: the pointed head at the top, the shaft, and the feathered notch at the base.',
+    obcImage: 'shi_arrow.png' },
+  { char: '門', pinyin: 'mén', gloss: 'door; gate', type: 'pictograph',
+    origin: 'A pair of swinging doors — the two leaves of a gate hung side by side.',
+    obcImage: 'men.png' },
+  { char: '舟', pinyin: 'zhōu', gloss: 'boat', type: 'pictograph',
+    origin: 'A small boat seen from above, with its planks and dividing cross-pieces.',
+    obcImage: 'zhou.png' },
+  { char: '車', pinyin: 'chē', gloss: 'cart; vehicle', type: 'pictograph',
+    origin: 'A chariot seen from above: the central axle box with a wheel (the modern 車 keeps one wheel).',
+    obcImage: 'che.png' },
+  { char: '衣', pinyin: 'yī', gloss: 'clothing; garment', type: 'pictograph',
+    origin: 'An upper garment with a collar at the top and two overlapping flaps below.',
+    obcImage: 'yi.png' },
+  { char: '網', pinyin: 'wǎng', gloss: 'net', type: 'pictograph',
+    origin: 'A hunting or fishing net stretched between two poles, showing its mesh.',
+    obcImage: 'wang.png' },
+
+  // ---- Simple ideographs (indicators) ----
+  { char: '一', pinyin: 'yī', gloss: 'one', type: 'ideograph',
+    origin: 'A single horizontal stroke standing for the number one.',
+    obcImage: 'yi_one.png' },
+  { char: '二', pinyin: 'èr', gloss: 'two', type: 'ideograph',
+    origin: 'Two horizontal strokes — a tally for the number two.',
+    obcImage: 'er_two.png' },
+  { char: '三', pinyin: 'sān', gloss: 'three', type: 'ideograph',
+    origin: 'Three stacked horizontal strokes — a tally for the number three.',
+    obcImage: 'san.png' },
+  { char: '上', pinyin: 'shàng', gloss: 'above; up', type: 'ideograph',
+    origin: 'A short mark placed above a baseline, pointing to the position "above".',
+    obcImage: 'shang.png' },
+  { char: '下', pinyin: 'xià', gloss: 'below; down', type: 'ideograph',
+    origin: 'A short mark placed below a baseline, pointing to the position "below".',
+    obcImage: 'xia.png' },
+  { char: '中', pinyin: 'zhōng', gloss: 'centre; middle', type: 'ideograph',
+    origin: 'A line passing through the centre of an enclosure — a banner pole through the middle of a target.',
+    obcImage: 'zhong.png' },
+
+  // ---- Compounds (meaning from combined pictures) ----
+  { char: '明', pinyin: 'míng', gloss: 'bright; clear', type: 'compound',
+    origin: 'Sun 日 and moon 月 placed together — the two brightest things in the sky combined to mean "bright".',
+    obcImage: 'ming.png' },
+  { char: '林', pinyin: 'lín', gloss: 'woods; forest', type: 'compound',
+    origin: 'Two trees 木 side by side — several trees together make a wood.',
+    obcImage: 'lin.png' },
+  { char: '森', pinyin: 'sēn', gloss: 'dense forest', type: 'compound',
+    origin: 'Three trees 木 stacked — many trees together mean a thick forest.',
+    obcImage: 'sen.png' },
+  { char: '休', pinyin: 'xiū', gloss: 'rest', type: 'compound',
+    origin: 'A person 人 leaning against a tree 木 — someone resting in the shade.',
+    obcImage: 'xiu.png' },
+  { char: '好', pinyin: 'hǎo', gloss: 'good', type: 'compound',
+    origin: 'A woman 女 beside a child 子 — a mother with her child, an image of what is good.',
+    obcImage: 'hao.png' },
+  { char: '男', pinyin: 'nán', gloss: 'male; man', type: 'compound',
+    origin: 'A field 田 above strength 力 (a plough) — the one who works the fields with force.',
+    obcImage: 'nan.png' },
+  { char: '安', pinyin: 'ān', gloss: 'peace; safe', type: 'compound',
+    origin: 'A woman 女 under a roof 宀 — someone at home and at peace.',
+    obcImage: 'an.png' },
+  { char: '家', pinyin: 'jiā', gloss: 'home; family', type: 'compound',
+    origin: 'A pig 豕 under a roof 宀 — a dwelling where livestock is kept, i.e. a home.',
+    obcImage: 'jia.png' },
+  { char: '采', pinyin: 'cǎi', gloss: 'to pick; gather', type: 'compound',
+    origin: 'A hand 爪 reaching down over a tree 木 — picking fruit or leaves from a plant.',
+    obcImage: 'cai.png' },
+  { char: '涉', pinyin: 'shè', gloss: 'to wade; ford', type: 'compound',
+    origin: 'Two feet 步 on either side of water 水 — stepping across a stream.',
+    obcImage: 'she.png' },
+
+  // ---- A few more everyday pictographs ----
+  { char: '女', pinyin: 'nǚ', gloss: 'woman; female', type: 'pictograph',
+    origin: 'A person kneeling with hands folded in front — a figure in a seated, demure posture.',
+    obcImage: 'nv.png' },
+  { char: '子', pinyin: 'zǐ', gloss: 'child', type: 'pictograph',
+    origin: 'A baby with a large head and arms, its legs still wrapped in swaddling.',
+    obcImage: 'zi_child.png' },
+  { char: '力', pinyin: 'lì', gloss: 'strength; power', type: 'pictograph',
+    origin: 'A plough or a flexed, muscular arm — the tool and effort of hard physical work.',
+    obcImage: 'li.png' },
 ]
 
 // Quick lookup by character.

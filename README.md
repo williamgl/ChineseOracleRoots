@@ -1,8 +1,13 @@
-# Oracle Bone Script Explorer — Cognitive Science Project
+# ChineseOracleRoots — Cognitive Science Project
+
+*Learn Chinese characters through their oracle bone origins.*
 
 A React web app + embedded learning experiment exploring whether seeing the
-**pictographic origin** of a Chinese character / Japanese kanji helps people **learn
-and remember** its meaning.
+**pictographic origin** of a Chinese character helps people **learn and remember** its
+meaning.
+
+**Working paper title:** *Do Pictographic Origins Aid Character Learning? A
+Dual-Coding Study Using Oracle Bone Script.*
 
 ## Cognitive science grounding
 
@@ -43,6 +48,8 @@ Cognitive Science/
   src/
     main.jsx, App.jsx, styles.css
     data/characters.js         # curated character set + etymologies (the study items)
+    lib/experiment.js          # pure experiment logic (assignment, test, scoring)
+    lib/experiment.test.js     # unit tests for the experiment logic (Vitest)
     views/ToolView.jsx         # "Explore" — character lookup + display
     views/ExperimentView.jsx   # "Learning Study" — study + quiz + results
     components/ObcImage.jsx     # oracle bone image with graceful fallback
@@ -50,6 +57,7 @@ Cognitive Science/
     extract_obc.py             # pull curated images from the HUST-OBC dataset
   public/
     obc/                       # extracted oracle bone images (generated)
+  .kiro/specs/oracle-bone-learning-tool/   # requirements, design, tasks
 ```
 
 ## Setup
@@ -58,6 +66,7 @@ Cognitive Science/
 npm install
 npm run dev      # http://localhost:5173
 npm run build    # production build in dist/
+npm test         # run the experiment-logic unit tests (Vitest)
 ```
 
 > Note: on Windows PowerShell, if `npm` is blocked by the execution policy, run
@@ -83,6 +92,15 @@ Append entries to `src/data/characters.js` following the documented schema, then
 the `(char, filename)` pair to `CURATED` in `scripts/extract_obc.py` and re-run it.
 Target ~50–100 well-attested pictographs for a well-powered study.
 
+## Analyzing results
+
+Each participant downloads one JSON file (see the schema in
+`.kiro/specs/oracle-bone-learning-tool/design.md`). To test the hypothesis, collect
+the files and compare mean `accuracy` between the `origin` and `gloss` groups — e.g. an
+independent-samples t-test (or Mann–Whitney U if assumptions fail). Each file also
+contains per-item `responses` for item-level analysis. Analysis is done offline; the
+app stores nothing.
+
 ## Attribution
 
 - **Oracle bone images:** HUST-OBC dataset — Wang et al., *An open dataset for oracle
@@ -92,12 +110,15 @@ Target ~50–100 well-attested pictographs for a well-powered study.
 ## Status
 
 - [x] React + Vite scaffold (builds cleanly)
-- [x] Character data schema + curated starter set (12 characters)
-- [x] HUST-OBC extraction script
+- [x] Requirements / design / tasks spec
+- [x] Rebranded to ChineseOracleRoots
+- [x] Curated character set (~60 characters with etymologies)
+- [x] Pure experiment logic module + unit tests (14 passing)
+- [x] Anonymous per-session participant ID
+- [x] HUST-OBC extraction script (synced to the full curated set)
 - [x] Tool view (lookup + display, with image fallback)
-- [x] Experiment flow (randomized conditions, study, quiz, downloadable results)
+- [x] Experiment flow (randomized conditions, study-set sampling, quiz, export)
 - [x] Documentation
 - [ ] Download dataset + run extractor to populate images
-- [ ] Expand curated set toward 50–100 characters
 - [ ] Collect responses + analyze
 ```

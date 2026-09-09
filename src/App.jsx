@@ -8,8 +8,8 @@ export default function App() {
   return (
     <div className="app">
       <header className="site">
-        <h1>甲骨文 · Oracle Bone Script Explorer</h1>
-        <p>See how ancient pictographs became modern Chinese characters and kanji</p>
+        <h1>甲骨文 · ChineseOracleRoots</h1>
+        <p>Learn Chinese characters through their oracle bone origins</p>
       </header>
 
       <nav className="tabs">

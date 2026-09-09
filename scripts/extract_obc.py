@@ -33,20 +33,35 @@ import sys
 from pathlib import Path
 
 # The (char, output-filename) pairs must match `obcImage` fields in
-# src/data/characters.js.
+# src/data/characters.js. Keep this list in sync when the dataset grows.
 CURATED = [
-    ("日", "ri.png"),
-    ("月", "yue.png"),
-    ("山", "shan.png"),
-    ("水", "shui.png"),
-    ("木", "mu.png"),
-    ("火", "huo.png"),
-    ("人", "ren.png"),
-    ("目", "mu_eye.png"),
-    ("口", "kou.png"),
-    ("手", "shou.png"),
-    ("雨", "yu.png"),
-    ("明", "ming.png"),
+    # Nature & sky
+    ("日", "ri.png"), ("月", "yue.png"), ("山", "shan.png"), ("水", "shui.png"),
+    ("火", "huo.png"), ("木", "mu.png"), ("雨", "yu.png"), ("雲", "yun.png"),
+    ("電", "dian.png"), ("土", "tu.png"), ("石", "shi_stone.png"), ("田", "tian.png"),
+    ("井", "jing.png"),
+    # Body
+    ("人", "ren.png"), ("大", "da.png"), ("目", "mu_eye.png"), ("口", "kou.png"),
+    ("耳", "er.png"), ("手", "shou.png"), ("心", "xin.png"), ("足", "zu.png"),
+    ("自", "zi.png"), ("首", "shou_head.png"),
+    # Animals
+    ("馬", "ma.png"), ("鳥", "niao.png"), ("魚", "yu_fish.png"), ("虎", "hu.png"),
+    ("象", "xiang.png"), ("羊", "yang.png"), ("牛", "niu.png"), ("犬", "quan.png"),
+    ("龍", "long.png"), ("龜", "gui.png"),
+    # Plants & food
+    ("禾", "he.png"), ("竹", "zhu.png"), ("米", "mi.png"), ("果", "guo.png"),
+    # Tools & objects
+    ("刀", "dao.png"), ("弓", "gong.png"), ("矢", "shi_arrow.png"), ("門", "men.png"),
+    ("舟", "zhou.png"), ("車", "che.png"), ("衣", "yi.png"), ("網", "wang.png"),
+    # Simple ideographs
+    ("一", "yi_one.png"), ("二", "er_two.png"), ("三", "san.png"), ("上", "shang.png"),
+    ("下", "xia.png"), ("中", "zhong.png"),
+    # Compounds
+    ("明", "ming.png"), ("林", "lin.png"), ("森", "sen.png"), ("休", "xiu.png"),
+    ("好", "hao.png"), ("男", "nan.png"), ("安", "an.png"), ("家", "jia.png"),
+    ("采", "cai.png"), ("涉", "she.png"),
+    # More everyday pictographs
+    ("女", "nv.png"), ("子", "zi_child.png"), ("力", "li.png"),
 ]
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".bmp"}

@@ -1,0 +1,10 @@
+# Netlify build configuration for ChineseOracleRoots (Vite static site).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA-style fallback: serve index.html for any unknown path.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

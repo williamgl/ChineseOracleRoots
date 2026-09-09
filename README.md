@@ -119,6 +119,9 @@ app stores nothing.
 - [x] Tool view (lookup + display, with image fallback)
 - [x] Experiment flow (randomized conditions, study-set sampling, quiz, export)
 - [x] Documentation
-- [ ] Download dataset + run extractor to populate images
+- [x] Download dataset + run extractor to populate images
 - [ ] Collect responses + analyze
 ```
+
+## Webpage link
+https://chineseoracleroots.netlify.app/

@@ -1,12 +1,19 @@
 import { useState } from 'react'
 
 // Renders the oracle bone image for a character, with a graceful fallback when the
-// image has not yet been extracted from the HUST-OBC dataset (see extract_obc.py).
+// image is missing or has not yet been extracted from the HUST-OBC dataset.
 export default function ObcImage({ entry, size = 84 }) {
-  const [failed, setFailed] = useState(false)
   const src = entry.obcImage ? `${import.meta.env.BASE_URL}obc/${entry.obcImage}` : null
 
-  if (!src || failed) {
+  // Track which src failed to load. We store the failed src (not a boolean) so the
+  // fallback only applies to that specific image. When the parent switches to a
+  // different character, `src` changes and the stale failure no longer matches,
+  // so the new (valid) image is attempted instead of staying stuck on "pending".
+  const [failedSrc, setFailedSrc] = useState(null)
+
+  const showFallback = !src || failedSrc === src
+
+  if (showFallback) {
     return (
       <div
         style={{
@@ -22,7 +29,7 @@ export default function ObcImage({ entry, size = 84 }) {
           textAlign: 'center',
           padding: 4,
         }}
-        title="Oracle bone image not yet extracted"
+        title="Oracle bone image not available"
       >
         image pending
       </div>
@@ -35,7 +42,7 @@ export default function ObcImage({ entry, size = 84 }) {
       alt={`Oracle bone form of ${entry.char}`}
       width={size}
       height={size}
-      onError={() => setFailed(true)}
+      onError={() => setFailedSrc(src)}
     />
   )
 }

@@ -190,3 +190,22 @@ footer.site {
   font-size: 0.75rem;
   margin-top: 40px;
 }
+
+.suggestions button.picked {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.link-back {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.link-back:hover {
+  text-decoration: underline;
+}

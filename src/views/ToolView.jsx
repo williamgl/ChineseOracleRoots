@@ -23,6 +23,33 @@ export default function ToolView() {
     }
   }
 
+  function clearSelection() {
+    setResult(null)
+    setNotFound(false)
+    setQuery('')
+  }
+
+  // The full character picker — always visible so the user can switch at any time.
+  const picker = (
+    <div className="card" style={{ marginTop: 16 }}>
+      <p className="hint">
+        {result ? 'Pick another character:' : 'Or pick a character:'}
+      </p>
+      <div className="suggestions">
+        {CHARACTERS.map((c) => (
+          <button
+            key={c.char}
+            onClick={() => lookup(c.char)}
+            className={result && result.char === c.char ? 'picked' : ''}
+            title={c.gloss}
+          >
+            {c.char}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+
   return (
     <div>
       <div className="search-row">
@@ -36,38 +63,22 @@ export default function ToolView() {
         <button onClick={() => lookup()}>Look up</button>
       </div>
 
-      {!result && !notFound && (
-        <div className="card">
-          <p className="hint">
-            Type a Chinese character or Japanese kanji above, or pick one:
-          </p>
-          <div className="suggestions">
-            {CHARACTERS.map((c) => (
-              <button key={c.char} onClick={() => lookup(c.char)}>
-                {c.char}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
       {notFound && (
         <div className="card">
           <p className="hint">
-            "{query}" is not in the curated set yet. Try one of these:
+            "{query}" is not in the curated set yet. Pick one below.
           </p>
-          <div className="suggestions">
-            {CHARACTERS.map((c) => (
-              <button key={c.char} onClick={() => lookup(c.char)}>
-                {c.char}
-              </button>
-            ))}
-          </div>
         </div>
       )}
 
       {result && (
         <div className="card">
+          <div style={{ marginBottom: 8 }}>
+            <button className="link-back" onClick={clearSelection}>
+              ← Back to all characters
+            </button>
+          </div>
+
           <div className="glyph-modern">{result.char}</div>
           <div className="glyph-label">modern form</div>
 
@@ -95,6 +106,9 @@ export default function ToolView() {
           </div>
         </div>
       )}
+
+      {/* Always available, whether or not something is selected. */}
+      {picker}
     </div>
   )
 }

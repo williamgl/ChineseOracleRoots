@@ -209,3 +209,31 @@ footer.site {
 .link-back:hover {
   text-decoration: underline;
 }
+
+footer.site p {
+  margin: 6px 0;
+}
+
+footer.site a {
+  color: var(--accent-soft);
+}
+
+.about h3 {
+  color: var(--accent);
+  font-size: 1rem;
+  margin-bottom: 4px;
+  margin-top: 20px;
+}
+
+.about ul {
+  margin: 6px 0;
+  padding-left: 20px;
+}
+
+.about li {
+  margin: 4px 0;
+}
+
+.about a {
+  color: var(--accent);
+}
